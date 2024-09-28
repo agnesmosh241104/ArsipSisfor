@@ -1,129 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+} 
 .container {
     display: flex;
-    height: 100vh;
-    color: #333;
-
 }
-
-.menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column; 
-    align-items: flex-start;
-  }
-  
-
-  .menu li img {
-    margin-right: 10px; /* Jarak antara ikon dan teks */
-  }
-  
-  .menu li a {
-    text-decoration: none;
-    color: #333; /* Warna teks */
-  }
 
 .sidebar {
-    flex: 0.3;
+    flex: 0.25;
     background-color: hsl(0, 0%, 96%);
-    padding: 30px;
-    /* border-radius: 20px; */
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-    /* margin-right: 30px;  */
+    padding: 20px;
 }
+
 .sidebar .logo {
     text-align: center;
-    margin-bottom: 5px;
-    
-    width: 300px; /* Sesuaikan ukuran yang diinginkan */
-     
-}
-.sidebar.Files{
-    text-align: center;
-    width: 30px
-}  
-.create-new {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #007aff;
-    color: white;   
-    text-align: center;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 30px;
-    font-family: 'Times New Roman', Times, serif;
-
+    margin-bottom: 20px;
 }
 .main-content {
-    flex: 2;
-    padding: 20px;
-    background-color: #f9f9f9; 
-    
+    flex: 3; 
+    padding: 40px;
 }
-*sampe sini*
 
-/* .top-bar {
+.navbar .navbar-nav a::after{
+    content: '';
+    display: block;
+    padding-bottom: 0.5rm;
+    border-bottom:0.rem solid var(--primary);  
+}
+
+.top-bar {
     display: flex;
     justify-content: space-between;
-    align-items: center; 
+    align-items: center;
     margin-bottom: 20px;
-} */
+}
+.search-bar input {
+    width: 400px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
 
-.search-bar {
-    flex: 0,1;
+.user-info {
     display: flex;
     align-items: center;
-    gap:100px
-
-
 }
 
-
-.search-bar input {
-    width: 30%;
-    padding: 10px;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-    margin-right: 10px;
-    box-sizing: border-box;
-    font-size: 19   px;
-} 
-    .header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: #ffffff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-        width: 30%;
-    }
- 
- .documents-section, .folders-section {
-    margin-top: 30px;
-    
-} 
-
-.documents, .folders {
-    display: flex;
-    /* justify-content: space-between; */
-}
-
-.document, .folder {
-    width: 23%;
+h1 {
+    font-size: 65px; 
+    font-weight: bold; 
+    margin: 70px ;
+    justify-content: center;
     text-align: center;
-    padding: 10px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    height: 100px; 
+    font-family: arial;
+    
+}    
+
+h2 {
+    font-size: 34px; 
+    margin: 40px;
+    font-style: sans serif;
+    color: #333;
+    
+}
+p{
+    font-size: 40px;
+    margin: 50px;
+    font-style: sans serif;
+    color: #333;
     
 
 }
-.welcome-message{
-    padding-left: 20px;
-    margin-left: 20px 
-
-} 

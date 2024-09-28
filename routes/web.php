@@ -3,10 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home'); // Route ke home.blade.php
+})->name('home');
 
-// Route untuk halaman Home
-Route::get('/', function () {
-    return view('home', ['name' => 'Bronson Siallagan']);
-});
+Route::get('/dokumen', function () {
+    return view('dokumen'); // Route ke dokumen.blade.php
+})->name('dokumen');
