@@ -16,28 +16,30 @@
                 <img src="img/logo.jpg" alt="logo" width="200">
             </div>
             <ul>
-                    <img src="img/dasboard.png" alt="dashboard" width="30">
-                    <a href="#">Dashboard</a>
+            <img src="img/dasboard.png" alt="dasboard" width="30">
+            <a href="{{ route('home') }}">Dashboard</a>
                     
-                    <div class="navbar-nav">
-                        <h3>Component</h3>
-          <img src="img/files.png" alt="files" width="30" style="margin-right: 10px;">
-            <a href="#">Dokumen Akademik</a>
+                    <div>
+    <h3>Component</h3>
+    <img src="img/files.png" alt="files" width="30">
+    <a href="{{ route('dokumen') }}">Dokumen Akademik</a>
+    <li style="display: flex; align-items: center; margin-bottom: 20px;"></li>
+        </li>
+        <li style="display: flex; align-items: center; margin-bottom: 20px;">
+
+            <img src="img/files.png" alt="files" width="45">
+            <a href="{{ route('laporan') }}"> Laporan Magang dan Kerja Praktek</a>
         </li>
         <li style="display: flex; align-items: center; margin-bottom: 10px;">
-            <img src="img/file.png" alt="file" width="30" style="margin-right: 10px;">
-            <a href="#">Laporan Magang dan Kerja Praktek</a>
+        <img src="img/files.png" alt="files" width="45">
+        <a href="{{ route('laporan') }}"> Dokumen KOmpetisi</a>
         </li>
         <li style="display: flex; align-items: center; margin-bottom: 10px;">
-            <img src="img/file.png" alt="file" width="30" style="margin-right: 10px;">
-            <a href="#">Dokumen Kompetisi</a>
-        </li>
-        <li style="display: flex; align-items: center; margin-bottom: 10px;">
-            <img src="img/file.png" alt="file" width="30" style="margin-right: 10px;">
-            <a href="#">Dokumen Kepanitiaan dan Organisasi</a>
+        <img src="img/files.png" alt="files" width="45">
+        <a href="{{ route('laporan') }}">Dokumen Kepanitiaan Organisasi</a>
         </li>
     </ul>
-</div>
+</div>  
         <!-- Main Content -->
         <div class="main-content">
             <div class="top-bar">
