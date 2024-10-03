@@ -2,6 +2,8 @@
 @section('title', 'registrasi')
 @section('content')
 
+
+
 <div class="container mt-5">
     @if(session('errors'))
         <div class="col-12">
@@ -9,7 +11,7 @@
                 <div class="alert alert-danger" role="alert">
                     {{ $error }}
                 </div>
-            @endforeach
+            @endforeach 
         </div>
     @endif
 
@@ -20,16 +22,16 @@
     @endif
 
     @if(session()->has('success'))
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success" role="alert"> 
             {{ session('success') }}
         </div>
     @endif
 </div>
 
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
-    <div class="card p-4" style="width: 400px; border-radius: 10px;">
+    <div class="card p-4" style="width:500px; border-radius: 50px;",>
         <div class="text-center">
-            <img src="img/logo.jpg" alt="logo" width="80">
+            <img src="img/logo.jpg" alt="logo" width="300">
             <h2 class="mt-3">Sign Up</h2>
             <p>Create your account.</p>
         </div>

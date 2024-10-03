@@ -23,6 +23,7 @@ function loginPost(Request $request){
         'email' => 'required|email',
         'password' => 'required'
     ]);
+    
 
     $credentials = $request->only('email', 'password');
     if(auth()->attempt($credentials)){

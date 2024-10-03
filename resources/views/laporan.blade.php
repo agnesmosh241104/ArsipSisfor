@@ -19,7 +19,7 @@
                 <h3>Kerja Praktik</h3>
                 <p>25.5 GB</p>
             </div>
-        </div>
+        </div> 
 
         <!-- Form Upload File -->
         <div class="card mt-5">

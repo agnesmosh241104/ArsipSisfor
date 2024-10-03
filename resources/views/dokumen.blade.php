@@ -25,7 +25,7 @@
                 <li>
                     <img src="img/files.png" alt="files" width="30">
                     <a href="{{ route('dokumen') }}">Dokumen Akademik</a>
-                </li>
+                </li> 
             </ul>
         </div>
 

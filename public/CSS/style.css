@@ -1,33 +1,62 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
+    margin: 24px;
     padding: 0;
     background-color: #f4f4f4;
-} 
-.container {
-    display: flex;
 }
 
+.container {
+    display: flex;
+    padding: 23px;
+
+}
 .sidebar {
-    flex: 0.25;
-    background-color: hsl(0, 0%, 96%);
-    padding: 20px;
+    flex: 0.2;
+    background-color: #fff;
+    padding: 10px;
+    margin: 0;
+    height: 100vh;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar .logo {
     text-align: center;
     margin-bottom: 20px;
 }
-.main-content {
-    flex: 3; 
-    padding: 40px;
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
 }
 
-.navbar .navbar-nav a::after{
-    content: '';
-    display: block;
-    padding-bottom: 0.5rm;
-    border-bottom:0.rem solid var(--primary);  
+.sidebar ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.sidebar ul li img {
+    margin-right: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+.sidebar ul h3 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.main-content {
+    flex: 0.8;
+    padding: 40px;
+    background-color: #f9f9f9;
+    height: 100vh;
+    overflow-y: scroll;
 }
 
 .top-bar {
@@ -36,13 +65,18 @@ body {
     align-items: center;
     margin-bottom: 20px;
 }
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
 .search-bar input {
-    width: 400px;
-    padding: 10px;
-    font-size: 16px;
+    width: 300px;
+    padding: 8px;
+    font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-right: 10px;
 }
 
 .user-info {
@@ -51,28 +85,27 @@ body {
 }
 
 h1 {
-    font-size: 65px; 
-    font-weight: bold; 
-    margin: 70px ;
-    justify-content: center;
+    font-size: 45px;
+    font-weight: bold;
     text-align: center;
-    height: 100px; 
-    font-family: arial;
-    
-}    
+    margin-bottom: 10px;
+    color: #333;
+}
 
 h2 {
-    font-size: 34px; 
-    margin: 40px;
-    font-style: sans serif;
+    font-size: 20px;
+    margin-bottom: 15px;
     color: #333;
-    
 }
-p{
-    font-size: 40px;
-    margin: 50px;
-    font-style: sans serif;
-    color: #333;
-    
 
+p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #555;
+    line-height: 1.5;
+    font-size: regular;
+
+
+
+   
 }

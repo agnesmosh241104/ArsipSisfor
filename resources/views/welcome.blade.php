@@ -2,5 +2,4 @@
 @section('title', 'home')
 
 
-
 @endsection

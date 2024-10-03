@@ -13,6 +13,9 @@ Route::get('/', function () {
     return view('home'); // Route ke home.blade.php
 })->name('home');
 
+Route::get('/dashboard', function () {
+    return view('dashboard'); // Route ke dokumen.blade.php
+})->name('dashboard');
 
 Route::get('/dokumen', function () {
     return view('dokumen'); // Route ke dokumen.blade.php
@@ -32,7 +35,7 @@ Route::post('/upload', [FileUploadController::class, 'uploadFile']);
 
 
 Route::get('/login', [NewAuthorManager::class , 'login'])->name('login');
-// Route::post('/login', [NewAuthorManager::class , 'loginPost'])->name('login.post');
+Route::post('/login', [NewAuthorManager::class , 'loginPost'])->name('login.post');
 
 Route::get('/registrasi', [NewAuthorManager::class , 'registrasi'])->name('registrasi');
 // Route::post('/registrasi', [NewAuthorManager::class , 'registrasiPost'])->name('registrasi.post');
