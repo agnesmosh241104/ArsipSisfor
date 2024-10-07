@@ -2,8 +2,6 @@
 @section('title', 'registrasi')
 @section('content')
 
-
-
 <div class="container mt-5">
     @if(session('errors'))
         <div class="col-12">
@@ -20,7 +18,7 @@
             {{ session('error') }}
         </div>
     @endif
-
+ 
     @if(session()->has('success'))
         <div class="alert alert-success" role="alert"> 
             {{ session('success') }}
@@ -56,7 +54,7 @@
             <button type="submit" class="btn btn-primary w-100">Sign Up</button>
         </form>
         <div class="text-center mt-3">
-            <p>Already have an account? <a href="{{ route('login') }}">Sign In</a></p>
+            <p>Already have an account? <a href="{{ route('login') }}">Sign in</a></p>
         </div>
     </div>
 </div>

@@ -1,43 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload File Example</title>
+    <title>Dokumen Akademik</title>
+    <link rel="stylesheet" href="{{ asset('css/get.css') }}">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <div class="card-container">
-            <div class="card">
-                <img src="img/Drive.png" alt="Drive" width="100">
-                <h3>Magang Bersetifikat</h3>
-                <p>25.5 GB</p>
+    <style></style>
+    <body>
+    <div class="container-fluid">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="img/logo.jpg" alt="logo" width="150">
             </div>
-            <div class="card">
-                <img src="img/Drive.png" alt="Drive" width="100">
-                <h3>Kerja Praktik</h3>
-                <p>25.5 GB</p>
-            </div>
-        </div> 
-
-        <!-- Form Upload File -->
-        <div class="card mt-5">
-            <div class="card-body">
-                <h5 class="card-title">Upload File</h5>
-                <form action="upload.php" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="fileUpload">Choose file to upload</label>
-                        <input type="file" name="fileToUpload" id="fileToUpload" class="form-control">
+            <ul>
+                <li>
+                <img src="img/dasboard.png" alt="dasboard" width="30">
+                    <div class="text">
+                        <a href="{{ route('home') }}">Dashboard</a>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Upload File</button>
-                </form>
+                </li>
+                <li>
+                    <img src="img/files.png" alt="files" width="30">
+                    <a href="{{ route('laporan') }}">Laporan Magang dan Kerja Praktek</a>
+                </li> 
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="card-container">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="search-bar">
+                    <input type="text" placeholder="Type here to search ...">
+                    <img src="img/search.png" alt="search" width="30">
+                </div>
+                <div class="user-info">
+                    <img src="img/bol.png" alt="bol" width="30" style="margin-right: 10px;">
+                    <img src="img/tes.png" alt="tes" width="40" style="margin-right: 10px;">
+                    <span>Hi, Alexa</span>
+                </div>
+            </div>
+            <div class="judul">
+                <h5>Dashboard
+                    <img src="img/navigate.png" alt="navigate" width="30">
+                    <img src="img/icon.png" alt="icon" width="10">
+                    lapooran magang Tahun 2018
+                    
+                </h5>
+            </div> 
+
+            <!-- Document Cards -->
+            <div class="card-dokumen">
+                <div class="card" style="width: 18rem;">
+                <img src="img/large.png" alt="large" width="30">
+                    <h3>Seminar Magang Bersertifikat_AirAsia/2018</h3>
+                </div>
+                <div class="card" style="width: 18rem;">
+                <img src="img/large.png" alt="large" width="30">
+                    <h3>Apple Developer Academy 2024</h3>
+                </div>
             </div>
         </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

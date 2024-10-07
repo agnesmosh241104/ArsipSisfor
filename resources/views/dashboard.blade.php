@@ -8,16 +8,17 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
  
-<body> 
+<body>  
     <div class="container"> 
-        <!-- Sidebar --> 
+        <!-- Sidebar -->
         <div class="sidebar">
             <div class="logo"> 
                 <img src="img/logo.jpg" alt="logo" width="200">
             </div>
             <ul>
             <img src="img/dasboard.png" alt="dasboard" width="30">
-            <a href="{{ route('home') }}">Dashboard</a>
+            <a href="{{ route('dashboard') }}">Dashboard</a>
+
 
                     <div>
     <h3>Component</h3> 
@@ -48,7 +49,7 @@
                     <input type="text" placeholder="Type here to search ......">
                     <img src="img/search.png" alt="search" width="40">
                 </div>
-                <div class="user-info">
+                <div class="user-info"> 
                 <img src="img/bol.png" alt="bol" width="30" style="margin-right: 10px;">
                     <img src="img/tes.png" alt="tes" width="70" style="margin-right: 10px;">
                     <i style="text-align:center;font size: 40px;"></i> <span>Hi, Alexa</span>

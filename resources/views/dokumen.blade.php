@@ -49,7 +49,7 @@
                     <img src="img/icon.png" alt="icon" width="10">
                     Dokumen Akademik
                 </h5>
-            </div>
+            </div> 
 
             <!-- Document Cards -->
             <div class="card-dokumen">

@@ -20,12 +20,13 @@ Route::get('/dashboard', function () {
 Route::get('/dokumen', function () {
     return view('dokumen'); // Route ke dokumen.blade.php
 })->name('dokumen');
-
+ 
 
 
 Route::get('/laporan', function () {
     return view('laporan'); // Route ke dokumen.blade.php
 })->name('laporan');
+
 
 
 Route::get('/upload', [FileUploadController::class, 'showUploadForm']);
@@ -38,8 +39,11 @@ Route::get('/login', [NewAuthorManager::class , 'login'])->name('login');
 Route::post('/login', [NewAuthorManager::class , 'loginPost'])->name('login.post');
 
 Route::get('/registrasi', [NewAuthorManager::class , 'registrasi'])->name('registrasi');
-// Route::post('/registrasi', [NewAuthorManager::class , 'registrasiPost'])->name('registrasi.post');
-// Route('/logout', [NewAuthorManager::class , 'logout'])->name('logout');
+Route::post('/registrasi', [NewAuthorManager::class , 'registrasiPost'])->name('registrasi.post');
+
+// Gunakan POST untuk logout agar lebih aman
+Route::post('/logout', [NewAuthorManager::class , 'logout'])->name('logout');
+
 
 use Illuminate\Support\Facades\Auth;
 

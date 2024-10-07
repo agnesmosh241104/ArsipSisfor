@@ -5,7 +5,7 @@ body {
     background-color: #f4f4f4;
 }
 
-.container {
+.container { 
     display: flex;
     padding: 23px;
 

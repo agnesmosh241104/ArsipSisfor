@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'registrasi')
+@section('title', 'Login')
 @section('content')
 
 <div class="container mt-5">
@@ -17,7 +17,7 @@
         <div class="alert alert-danger" role="alert">
             {{ session('error') }}
         </div> 
-    @endif
+    @endif 
 
     @if(session()->has('success'))
         <div class="alert alert-success" role="alert">
@@ -34,10 +34,10 @@
             <p>Login To Stay Connected.</p> 
         </div>
         <form action="{{route('login.post')}}" method="post"> 
-              @csrf 
-              <div class="mb-3">
-                  <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required>
-              </div> 
+            @csrf 
+            <div class="mb-3">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+            </div> 
             <div class="mb-3">
                 <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
             </div>
@@ -48,7 +48,7 @@
             <button type="submit" class="btn btn-primary w-100">Sign In</button> 
         </form>
         <div class="text-center mt-3">
-            <p>Create an Account <a href="{{ route('login') }}">Sign Up</a></p>
+            <p>Don't have an account? <a href="{{ route('registrasi') }}">Sign Up</a></p>
         </div>
     </div>
 </div>
