@@ -23,7 +23,7 @@
                     <img src="img/logo.jpg" alt="Logo" width="80">
                 </a>
             </div>
-            <div class="main">
+            <div class="main"> 
                 <div class="list-item">
                     <a href="">
                         <img src="img/dasboard.png" alt="" width="18">

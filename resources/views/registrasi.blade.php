@@ -25,7 +25,7 @@
         </div>
     @endif
 </div>
-
+  
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
     <div class="card p-4" style="width: 400px; border-radius: 10px;">
         <div class="text-center">

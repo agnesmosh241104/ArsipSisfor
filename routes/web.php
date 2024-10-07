@@ -5,21 +5,27 @@ use App\Http\Controllers\NewAuthorManager;
 use App\Http\Controllers\FileUploadController;
 
 
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     return view('home'); // Route ke home.blade.php
 })->name('home');
 
 
-Route::get('/dokumen', function () {
+Route::get('/dokumenAkademik', function () {
     return view('dokumen'); // Route ke dokumen.blade.php
 })->name('dokumen');
 
 
-
 Route::get('/laporan', function () {
-    return view('laporan'); // Route ke dokumen.blade.php
+    return view('laporanMagang'); // Route ke dokumen.blade.php
 })->name('laporan');
 
+Route::get('/dokumenKompetisi', function () {
+    return view('laporan'); // Route ke dokumen.blade.php
+})->name('laporan'); 
+
+Route::get('/dokumenKepanitiaan', function () {
+    return view('laporan'); // Route ke dokumen.blade.php
+})->name('laporan');
 
 // Route::get('/upload', [FileUploadController::class, 'showUploadForm']);
 // Route::post('/upload', [FileUploadController::class, 'uploadFile']);
