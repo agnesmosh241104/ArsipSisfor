@@ -1,0 +1,77 @@
+body {
+    background: color #d9d9d9;; /* Warna latar belakang */
+    font-family: Arial, sans-serif; /* Font umum */
+}
+
+.nav-link .dropdown-toggle {
+    color: white; /* Warna teks */
+    size: 12px;
+}
+
+.navbar {
+    padding: 1rem;
+}
+
+.dropdown {
+    position: relative; /* Untuk menempatkan dropdown */
+}
+
+.dropdown-toggle {
+    color: white; /* Warna teks */
+    border: none; /* Tanpa border */
+    padding: 10px 20px; /* Padding tombol */
+    border-radius: 5px; /* Sudut melengkung */
+    cursor: pointer; /* Menunjukkan bisa di klik */
+}
+
+.dropdown-menu {
+    display: none; /* Tersembunyi secara default */
+    position: absolute; /* Menempatkan di bawah tombol */
+    background-color: white; /* Warna latar belakang */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan */
+    border-radius: 5px; /* Sudut melengkung */
+    margin-top: 5px; /* Jarak atas dari tombol */
+    z-index: 1000; /* Menyusun di atas elemen lainnya */
+}
+
+.dropdown-menu.show {
+    display: block; /* Tampilkan ketika aktif */
+}
+
+.dropdown-item {
+    padding: 10px 15px; /* Padding untuk item */
+    color: #333; /* Warna teks */
+    text-decoration: none; /* Menghilangkan garis bawah */
+    display: block; /* Membuat item seluas dropdown */
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1; /* Warna latar belakang saat hover */
+}
+
+.card {
+    background-color: white; 
+    border-radius: 10px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    margin-left: 30%;
+}
+
+
+
+.card-title {
+    font-size: 15px; /* Ukuran font judul */
+    font-weight: bold; /* Bold font */
+    margin-bottom: 10px; /* Jarak antara judul dan teks */
+    text-align: left;
+}
+
+.card-title p {
+    font-size: 18px; /* Ukuran font judul */
+    font-weight: bold; /* Bold font */
+    margin-bottom: 10px; /* Jarak antara judul dan teks */
+    text-align: left;
+}
+
+.card-subtitle {
+    color: #666; /* Warna teks subtitle */
+}

@@ -1,50 +1,27 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\NewAuthorManager;
-use App\Http\Controllers\FileUploadController;
+// routes/web.php
+use App\Http\Controllers\DocumentController;
+// use App\Http\Controllers\UploadController;
 
+Route::get('/', function () {
+    return view('dashboard');
+})->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('home'); // Route ke home.blade.php
-})->name('home');
+// Route for Dokumen Akademik
+Route::get('/dokumenAkademik', [DocumentController::class, 'dokumenAkademik'])->name('dokumen-akademik');
 
+// Route for Laporan Magang dan KP
+Route::get('/laporanMagang', [DocumentController::class, 'laporanMagang'])->name('laporan-magang');
 
-Route::get('/dokumenAkademik', function () {
-    return view('dokumen'); // Route ke dokumen.blade.php
-})->name('dokumen');
+// Route for Dokumen Kompetisi
+Route::get('/dokKompetisi', [DocumentController::class, 'dokKompetisi'])->name('dokumen-kompetisi');
 
+// Route for Dokumen Kepanitiaan
+Route::get('/dokKepanitiaan', [DocumentController::class, 'dokKepanitiaan'])->name('dokumen-kepanitiaan');
 
-Route::get('/laporan', function () {
-    return view('laporanMagang'); // Route ke dokumen.blade.php
-})->name('laporan');
-
-Route::get('/dokumenKompetisi', function () {
-    return view('laporan'); // Route ke dokumen.blade.php
-})->name('laporan'); 
-
-Route::get('/dokumenKepanitiaan', function () {
-    return view('laporan'); // Route ke dokumen.blade.php
-})->name('laporan');
-
-// Route::get('/upload', [FileUploadController::class, 'showUploadForm']);
-// Route::post('/upload', [FileUploadController::class, 'uploadFile']);
-
-
-Route::get('/login', [NewAuthorManager::class , 'login'])->name('login');
-// Route::post('/login', [NewAuthorManager::class , 'loginPost'])->name('login.post');
-
-Route::get('/registrasi', [NewAuthorManager::class , 'registrasi'])->name('registrasi');
-// Route::post('/registrasi', [NewAuthorManager::class , 'registrasiPost'])->name('registrasi.post');
-// Route('/logout', [NewAuthorManager::class , 'logout'])->name('logout');
-
-use Illuminate\Support\Facades\Auth;
-
-// Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
-
-
-Route::get('/layout', function () {
-    return view('layout'); // Route ke dokumen.blade.php
-})->name('layout');
-
-
+Route::get('/dokumen-akademik', [DocumentController::class, 'index'])->name('dokumen-akademik');
+Route::get('/dokumen-akademik/new-folder', [DocumentController::class, 'createNewFolder'])->name('new-folder');
+Route::get('/dokumen-akademik/upload-folder', [DocumentController::class, 'uploadFolder'])->name('upload-folder');
+Route::get('/dokumen-akademik/upload-file', [DocumentController::class, 'uploadFile'])->name('upload-file');
