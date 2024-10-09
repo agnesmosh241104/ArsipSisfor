@@ -19,13 +19,15 @@
                 <li>
                 <img src="img/dasboard.png" alt="dasboard" width="30">
                     <div class="text">
-                        <a href="{{ route('home') }}">Dashboard</a>
+                        <a href="{{ route('laporan') }}">Dashboard</a>
                     </div>
                 </li>
                 <li>
                     <img src="img/files.png" alt="files" width="30">
                     <a href="{{ route('dokumen') }}">Dokumen Akademik</a>
                 </li> 
+                <!-- <img src="img/files.png" alt="files" width="30">
+                    <a href="{{ route('kompetisi') }}">Dokumen Kepanitiaan Organisasi</a> -->
             </ul>
         </div>
 
@@ -49,19 +51,25 @@
                     <img src="img/icon.png" alt="icon" width="10">
                     Dokumen Akademik
                 </h5>
-            </div> 
-
+            </div> Akademik
             <!-- Document Cards -->
             <div class="card-dokumen">
                 <div class="card" style="width: 18rem;">
                     <img src="img/Drive.png" alt="Drive">
+                    <form action="/upload" method="POST" enctype="multipart/form-data">
                     <h3>Tugas Kuliah</h3>
                     <p>25.5 GB</p>
+                    <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="file" id="file" required>
+                  <button type="submit">Upload</button>
                 </div>
                 <div class="card" style="width: 18rem;">
                     <img src="img/Drive.png" alt="Drive">
                     <h3>Skripsi</h3>
                     <p>25.5 GB</p>
+                    <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" id="file" required>
+            <button type="submit">Upload</button>
                 </div>
             </div>
         </div>

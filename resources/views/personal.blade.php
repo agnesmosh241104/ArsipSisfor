@@ -60,15 +60,49 @@
                     <span>Hi, Alexa</span>
                 </div>
             </div>
-            <h1>Selamat Datang di Arsip SI</h1>
-            <p>Platform ini dirancang untuk mempermudah pengelolaan dokumen dan artefak penting di Program Studi Sistem Informasi IT Del.</p>
-            <h2>Mengelola Dokumen Penting dengan Praktis</h2>
-            <p>Simpan, atur, dan akses dokumen akademik Anda di satu platform yang dirancang untuk memudahkan pengelolaan dan pencarian dokumen.</p>
-            <h2>Mendapatkan Keunggulan dari ArsipSI</h2>
-            <p>Nikmati fitur unggulan ArsipSI yang memungkinkan semua anggota Program Studi Sistem Informasi untuk mengunggah dan mengelola dokumen dengan mudah dan aman.</p>
-            <h2>Mengoptimalkan Pengelolaan Arsip Akademik</h2>
-            <p>Dengan ArsipSI, dosen, mahasiswa, dan staf dapat dengan cepat mengunggah, menyimpan, dan mengelola dokumen akademik, sehingga proses administrasi berjalan lebih lancar dan efisien.</p>
+
+            <div class="form-container">
+            
+            <a href="{{ route('manage') }}">Manages Contact</a>
+    
+    <div class="form-content">
+        <div class="profile">
+        <img src="img/brn.png" alt="brn" width="30">
+        </div>
+        <div class="details">
+            <form>
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" value="Bronson">
+
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" value="Siallagan">
+
+                <label for="username">User Name:</label>
+                <input type="text" id="username" name="username" value="Bronson@025">
+
+                <label>Gender:</label>
+                <label for="male">Male</label>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="female">Female</label>
+                <input type="radio" id="female" name="gender" value="female">
+
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" value="Toba Samosir">
+
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" value="2003-12-16">
+
+                <label for="address">Address:</label>
+                <textarea id="address" name="address">Jalan Permata Samosir no 33</textarea>
+
+                <div class="buttons">
+                    <button type="submit">Submit</button>
+                    <button type="button" class="cancel" onclick="window.location.href='index.html'">Cancel</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
+
 </body>
 </html>

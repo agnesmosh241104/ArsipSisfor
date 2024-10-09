@@ -1,7 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-}
-
+} 
 /* Sidebar Styling */
 .sidebar {
     width: 250px;
@@ -22,7 +21,7 @@ body {
     padding: 0;
 }
 
-.sidebar ul li {
+.sidebar ul li { 
     padding: 15px;
     display: flex;
     align-items: center;
@@ -105,6 +104,92 @@ body {
     margin-bottom: 10px;
 }
 
-.card p {
+.card p { 
     color: #555;
 }
+
+/* Container utama untuk card dokumen */
+.card-dokumen {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Desain kartu */
+.card {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Hover efek untuk card */
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Style untuk gambar di dalam card */
+.card img {
+    max-width: 100px;
+    margin-bottom: 10px;
+}
+
+/* Style untuk heading dan paragraf */
+.card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 1rem;
+    color: #777;
+}
+
+/* Style untuk form upload */
+form {
+    margin-top: 15px;
+}
+
+/* Style input file */
+input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style tombol upload */
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: white   ;
+}
+
+/* Responsive untuk tampilan mobile */
+@media (max-width: 768px) {
+    .card-dokumen {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+

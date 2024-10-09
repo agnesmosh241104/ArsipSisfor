@@ -17,14 +17,22 @@ class NewAuthorManager extends Controller
     // Menampilkan halaman registrasi
     function registrasi(){
         return view('registrasi');
-    }
-
+    } 
     // Menangani login (POST request)
     function loginPost(Request $request){
         $request->validate([
             'email' => 'required|email',
             'password' => 'required'
         ]);
+
+           // Menangani logout
+ // Menangani logout
+function logout(){
+    session()->flush();    // Menghapus session
+    auth()->logout();      // Logout dari session auth
+    return redirect(route('login'));   // Redirect ke halaman login
+}
+
 
         // Ambil hanya email dan password dari request
         $credentials = $request->only('email', 'password');
@@ -38,11 +46,19 @@ class NewAuthorManager extends Controller
         return redirect(route('login'))->with('error', 'Login details are not valid');
     }
 
+    // Menangani logout
+function logout(){
+    auth()->logout(); // Logout dari sesi autentikasi
+    session()->flush(); // Menghapus semua session data
+    return redirect()->route('login'); // Redirect ke halaman login
+}
+
+
     // Menangani registrasi (POST request)
     function registrasiPost(Request $request){
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email|unique:users', 
             'password' => 'required|min:6',
         ]);
 
@@ -58,10 +74,33 @@ class NewAuthorManager extends Controller
         return redirect(route('login'))->with('success', 'Registrasi success');
     } 
 
-    // Menangani logout
-    function logout(){
-        session()->flush();
-        auth()->logout();
-        return redirect(route('login'));
+ 
+
+
+    // Menampilkan form pembuatan proyek
+    function create(){
+        return view('create-proyek'); // Ganti dengan nama view yang sesuai
     }
+}
+
+ // Menampilkan form kompetisi
+ function kompetisi()
+ {
+     return view('kompetisi'); // Pastikan nama ini sesuai dengan file blade
+ }
+
+
+    function store(Request $request)
+{
+    // Validasi data form
+    $validated = $request->validate([
+        'nama' => 'required|string|max:255',
+        'deskripsi' => 'required|string',
+    ]);
+
+    // Simpan proyek ke database
+    Proyek::create($validated);
+
+    // Redirect dengan pesan sukses
+    return redirect()->route('create-proyek')->with('success', 'Proyek berhasil dibuat!');
 }
