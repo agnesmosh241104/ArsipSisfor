@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
+            $table->string('id_doc'); // Pastikan kolom ini ada
             $table->string('nama');
-            $table->year('tahun');
-            $table->string('file_path'); // Menyimpan path file yang di-upload
+            $table->integer('tahun');
+            $table->string('file_path');
+            $table->string('fitur')->nullable();
             $table->timestamps();
         });
-    }
-
-    
+        
+    } 
 
     /**
      * Reverse the migrations.

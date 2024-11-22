@@ -6,17 +6,25 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up()
     {
         Schema::table('documents', function (Blueprint $table) {
-            $table->string('folder_name')->nullable(); // Tambahkan kolom folder_name
+            $table->string('kategori')->nullable(); // Atau tipe data lain sesuai kebutuhan
         });
     }
-
+    
     public function down()
     {
         Schema::table('documents', function (Blueprint $table) {
-            $table->dropColumn('folder_name'); // Hapus kolom jika rollback
+            $table->dropColumn('kategori');
         });
     }
+    
+
+    /**
+     * Reverse the migrations.
+     */
 };

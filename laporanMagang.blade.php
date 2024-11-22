@@ -76,10 +76,12 @@
     <div class="container mt-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Dokumen Magang dan KP</li>
-            </ol>
-        </nav>
+                <li class="nav-item">
+                    <a href="{{ route('documents.create') }}" class="nav-link">
+                        <i class="fas fa-layer-group"></i>
+                        <p>Dokumen Akademik</p>
+                    </a>
+                </li>
 
         <!-- <div class="d-flex justify-content-between align-items-center mb-3">
             <!-- Create New Button with Submenu -->

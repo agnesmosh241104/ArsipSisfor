@@ -33,11 +33,11 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom custom-navbar">
         <div class="container-fluid">
             <!-- Search Form -->
-            <form class="d-flex me-auto ms-3">
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex me-auto ms-3" method="GET" action="{{ route('search') }}">
+                <input class="form-control" type="search" placeholder="Search" name="query" aria-label="Search" value="{{ old('query') }}">
                 <button class="btn btn-outline-secondary" type="submit">
                     <i class="fa fa-search"></i>
-                </button>
+                </button> 
             </form>
 
             <div class="user-info">
@@ -78,68 +78,44 @@
                         <p>Laporan Magang KP</p>
                     </a>
                 </li>
-                <!-- <li class="breadcrumb-item active" aria-current="page">Dokumen Akademik</li>  -->
-            </ol>
-        </nav>
-        <div class="col-md-4">
-            <a href="{{ route('upload-list', ['type' => 'proyek']) }}" class="text-decoration-none">
-                <div class="card" onclick="goToNextView()">
-                    <div class="card-body text-center">
-                        <img src="{{ asset('assets/img/kaiadmin/Drive.png') }}" alt="Drive Icon">
-                        <h5 class="card-title">Tugas Proyek Kuliah</h5>
-                        <p class="card-text">Gasal 2022</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+                <!-- <div class="container">
+                    <h1>Tambah Upload</h1>
+                    <form action="{{ route('uploads.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="id_doc" class="form-label">Jenis Dokumen</label>
+                            <select class="form-control" id="id_doc" name="id_doc" required>
+                                <option value="">Pilih Jenis Dokumen</option>
+                                <option value="laporan_magang">Laporan Magang</option>
+                                <option value="dokumen_akademik">Dokumen Akademik</option>
+                                <option value="dokumen_kompetisi">Dokumen Kompetisi</option>
+                                <option value="dokumen_kepanitiaan">Dokumen Kepanitiaan</option>
+                            </select>
+                        </div>
+                        <div class="mb-3"> 
+                            <label for="nama" class="form-label">Nama</label>
+                            <input type="text" class="form-control" id="nama" name="nama" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tahun" class="form-label">Tahun</label>
+                            <input type="number" class="form-control" id="tahun" name="tahun" min="1900" max="{{ date('Y') }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="file" class="form-label">File</label>
+                            <input type="file" class="form-control" id="file" name="file" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div> -->
+
+
     </div>
-    <script>
-        function goToNextView() {
-            // Navigasi ke tampilan selanjutnya
-            window.location.href = "{{ route('upload-list', ['type' => 'proyek']) }}";
-        }
-    </script>
-    <!-- Card for Skripsi -->
-    <div class="col-md-4">
-        <a href="{{ route('upload-list', ['type' => 'skripsi']) }}" class="text-decoration-none">
-            <div class="card">
-                <div class="card-body text-center">
-                    <img src="{{ asset('assets/img/kaiadmin/Drive.png') }}">
-                    <h5 class="card-title">Skripsi</h5>
-                    <p class="card-text">2020/2021</p>
-                </div>
-            </div>
-        </a>
-    </div>
-</div>
-<!-- resources/views/documents/laporanMagang.blade.php -->
-<form action="{{ route('documents.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <input type="hidden" name="fitur" value="dokumenAkademik"> <!-- Sesuaikan untuk fitur dokumenAkademik atau laporanMagang -->
-    <!-- Input lainnya seperti nama, tahun, dan file -->
-    <button type="submit">Upload</button>
-</form>
-
-<div class="form-group">
-    <label for="tahun">Tahun:</label>
-    <input type="number" name="tahun" id="tahun" class="form-control" required>
-</div>
-<div class="form-group">
-    <label for="file">File:</label>
-    <input type="file" name="file" id="file" class="form-control" required>
-</div>
-<button type="submit" class="btn btn-success">Simpan</button>
-</form>
-
-
-
-
-</div>
-<!-- Core JS Files -->
-<script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
-<script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
-<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/js/script.js') }}"></script> <!-- Custom JS -->
+    <!-- Core JS Files -->
+    <script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/script.js') }}"></script> <!-- Custom JS -->
 
 </div>
 @endsection

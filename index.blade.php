@@ -32,9 +32,8 @@
     <!-- Topbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom custom-navbar">
         <div class="container-fluid">
-            <!-- Search Form -->
-            <form class="d-flex me-auto ms-3">
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex me-auto ms-3" style="flex-grow: 1;" method="GET" action="/search">
+                <input class="form-control" type="search" name="query" placeholder="Cari file atau folder" aria-label="Search">
                 <button class="btn btn-outline-secondary" type="submit">
                     <i class="fa fa-search"></i>
                 </button>
@@ -70,25 +69,49 @@
     <h1>Documents List</h1>
     <a href="{{ route('documents.create') }}" class="btn btn-primary"></a>
 
-    
-    <tbody>
-        @foreach ($documents as $document)
-        <tr>
-            <td>{{ $document->nama }}</td>
-            <td>{{ $document->tahun }}</td>
-            <td>
-                <a href="{{ asset('storage/' . $document->file_path) }}" target="_blank">Lihat File</a>
-            </td>
-        </tr>
 
-        <div class="card" style="width: 18rem;">
-            <h3>{{ $document->nama }}</h3>
-            <img src="{{ asset('assets/img/kaiadmin/Drive.png') }}" alt="Drive Icon" width="100px">
-            <div class="card-body">
-                <p class="card-text">{{ $document->tahun }}</p>
-            </div>
+    <div class="container">
+        <h1>Daftar Dokumen</h1>
+        <a href="{{ route('documents.create') }}" class="btn btn-primary mb-3">Tambah Dokumen/Folder</a>
+
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
-        @endforeach
-    </tbody>
+        @endif
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Tahun</th>
+                    <th>File/Folder</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($documents as $document)
+                <tr>
+                    <td>{{ $document->nama }}</td>
+                    <td>{{ $document->tahun ?? 'Tidak Ditentukan' }}</td> <!-- Menangani jika tahun tidak diisi -->
+                    <td>
+                        @if ($document->file_path)
+                        <a href="{{ asset('storage/' . $document->file_path) }}" target="_blank">Lihat File</a>
+                        @elseif ($document->folder_name)
+                        Folder: {{ $document->folder_name }}
+                        @endif
+                    </td>
+                    <td>
+                        <a href="{{ route('documents.edit', $document->id) }}" class="btn btn-warning">Edit</a>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+
+
     </table>
-    @endsection
+</div>
+@endsection

@@ -98,12 +98,13 @@
                 <div class="container-fluid">
 
                     <!-- Search Form -->
-                    <form class="d-flex me-auto ms-3" style="flex-grow: 1;">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    <form class="d-flex me-auto ms-3" style="flex-grow: 1;" method="GET" action="/search">
+                        <input class="form-control" type="search" name="query" placeholder="Cari file atau folder" aria-label="Search">
                         <button class="btn btn-outline-secondary" type="submit">
                             <i class="fa fa-search"></i>
                         </button>
                     </form>
+
 
                     <div class="user-info">
                         <img src="{{ asset('assets/img/kaiadmin/setting.png') }}" alt="" height="50">

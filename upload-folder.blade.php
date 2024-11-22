@@ -32,17 +32,17 @@
     <!-- Topbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom custom-navbar">
         <div class="container-fluid">
-            <!-- Search Form -->
-            <form class="d-flex me-auto ms-3" method="GET" action="{{ route('search') }}">
-                <input class="form-control" type="search" placeholder="Search" name="query" aria-label="Search" value="{{ old('query') }}">
+            <form class="d-flex me-auto ms-3" style="flex-grow: 1;" method="GET" action="/search">
+                <input class="form-control" type="search" name="query" placeholder="Cari file atau folder" aria-label="Search">
                 <button class="btn btn-outline-secondary" type="submit">
                     <i class="fa fa-search"></i>
-                </button> 
+                </button>
             </form>
 
             <div class="user-info">
                 <img src="{{ asset('assets/img/kaiadmin/setting.png') }}" alt="" height="50">
             </div>
+
             <!-- Profile Dropdown -->
             <div class="dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
@@ -66,25 +66,35 @@
             </div>
         </div>
     </nav>
+    <div class="container">
+        <h1>Upload Folder</h1>
 
-    <!-- Breadcrumbs -->
-    <div class="container mt-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="nav-item">
-                    <a href="{{ route('documents.index') }}" class="nav-link">
-                        <i class="fas fa-layer-group"></i>
-                        <p>Dokumen Akademik</p>
-                    </a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">Dokumen Akademik</li>
-            </ol>
-    </div>
-    <!-- Core JS Files -->
-    <script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
-    <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/script.js') }}"></script> <!-- Custom JS -->
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
 
-</div>
-@endsection
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif 
+        <form action="{{ route('store-folder') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-3">
+                <label for="folder_name" class="form-label">Folder Name</label>
+                <input type="text" name="folder_name" id="folder_name" class="form-control" required>
+            </div>
+
+            <div class="mb-3"> 
+                <label for="folder_files" class="form-label">Select Folder</label>
+                <!-- Tambahkan `webkitdirectory` untuk memungkinkan upload folder -->
+                <input type="file" name="folder_files[]" id="folder_files" class="form-control" webkitdirectory directory required>
+            </div> 
+            <button type="submit" class="btn btn-primary">Upload Folder</button>
+        </form>
