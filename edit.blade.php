@@ -78,11 +78,7 @@
             <div class="mb-3">
                 <label for="tahun" class="form-label">Tahun</label>
                 <input type="number" class="form-control" id="tahun" name="tahun" min="1900" max="{{ date('Y') }}" value="{{ $document->tahun }}" required>
-            </div>
-            <!-- <div class="mb-3">
-                <label for="folder_name" class="form-label">Folder</label>
-                <input type="text" class="form-control" id="folder_name" name="folder_name" value="{{ $document->folder_name }}">
-            </div> -->
+            </div> 
             <div class="mb-3">
                 <label for="file" class="form-label">File</label>
                 <input type="file" class="form-control" id="file" name="file">
@@ -91,4 +87,5 @@
             <button type="submit" class="btn btn-primary">Perbarui</button>
         </form>
     </div>
+    
     @endsection

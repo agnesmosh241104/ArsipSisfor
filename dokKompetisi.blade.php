@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app') <!-- Pastikan layout ini ada di folder views/layouts -->
 
 @section('content')
 
@@ -26,22 +26,19 @@
 
 <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/plugins.min.css') }}">
-{{-- <link rel="stylesheet" href="{{ asset('assets/css/kaiadmin.min.css') }}"> --}}
 <link rel="stylesheet" href="{{ asset('assets/css/akademik.css') }}"> <!-- Custom styles -->
 
 <div class="main-panel">
     <!-- Topbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom custom-navbar">
         <div class="container-fluid">
-
             <!-- Search Form -->
-            <form class="d-flex me-auto ms-3">
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex me-auto ms-3" method="GET" action="{{ route('search') }}">
+                <input class="form-control" type="search" placeholder="Search" name="query" aria-label="Search" value="{{ old('query') }}">
                 <button class="btn btn-outline-secondary" type="submit">
                     <i class="fa fa-search"></i>
-                </button>
+                </button> 
             </form>
-
             <div class="user-info">
                 <img src="{{ asset('assets/img/kaiadmin/setting.png') }}" alt="" height="50">
             </div>
@@ -57,7 +54,6 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <!-- Form Logout -->
                     <li>
                         <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
                             @csrf
@@ -71,7 +67,6 @@
         </div>
     </nav>
 
-    </nav>
     <!-- Breadcrumbs -->
     <div class="container mt-3">
         <nav aria-label="breadcrumb">
@@ -79,81 +74,67 @@
                 <li class="nav-item">
                     <a href="{{ route('documents.create') }}" class="nav-link">
                         <i class="fas fa-layer-group"></i>
-                        <p>Dokumen Akademik</p>
+                        <p>Dokumen Kompetisi</p>
                     </a>
                 </li>
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <!-- Create New Button with Submenu -->
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="createNewBtn" data-bs-toggle="dropdown" aria-expanded="false">
-                            Create New
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="createNewBtn">
-                            <li><a class="dropdown-item" href="{{ route('new-folder') }}">New Folder</a></li>
-                            <li><a class="dropdown-item" href="{{ route('upload-folder') }}">Upload Folder</a></li>
-                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#uploadFileModal">Upload File</a></li>
-                        </ul>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Dokumen Akademik</li>  -->
+            </ol>
+        </nav>
+        <div class="col-md-4">
+            <a href="{{ route('upload-list', ['type' => 'proyek']) }}" class="text-decoration-none">
+                <div class="card" onclick="goToNextView()">
+                    <div class="card-body text-center">
+                        <img src="{{ asset('assets/img/kaiadmin/Drive.png') }}" alt="Drive Icon">
+                        <h5 class="card-title">Dokumen Kompetisi</h5>
+                        <p class="card-text">Gasal 2022</p>
                     </div>
                 </div>
-
-                <!-- Modal for Upload File -->
-                <div class="modal fade" id="uploadFileModal" tabindex="-1" aria-labelledby="uploadFileModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="uploadFileModalLabel">Upload File</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="{{ route('upload-file') }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="mb-3">
-                                        <label for="file" class="form-label">Choose file to upload</label>
-                                        <input type="file" class="form-control" id="file" name="file" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Upload</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Document Grid -->
-                <div class="row">
-                    <!-- Card for Tugas Proyek Kuliah -->
-                    <div class="col-md-4">
-                        <a href="{{ route('upload-list', ['type' => 'proyek']) }}" class="text-decoration-none">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <img src="{{ asset('assets/img/kaiadmin/Drive.png') }}">
-                                    <h5 class="card-title">Data Science</h5>
-                                    <p class="card-text">25 GB</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Card for Skripsi -->
-                    <div class="col-md-4">
-                        <a href="{{ route('upload-list', ['type' => 'skripsi']) }}" class="text-decoration-none">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <img src="{{ asset('assets/img/kaiadmin/Drive.png') }}">
-                                    <h5 class="card-title">Lot</h5>
-                                    <p class="card-text">25 GB</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+            </a>
+        </div>
     </div>
-    <script src="{{ asset('assets/js/script.js') }}"></script>
+    <script>
+        function goToNextView() {
+            // Navigasi ke tampilan selanjutnya
+            window.location.href = "{{ route('upload-list', ['type' => 'proyek']) }}";
+        }
+    </script>
+    <!-- Card for Skripsi -->
+    <div class="col-md-4">
+        <a href="{{ route('upload-list', ['type' => 'skripsi']) }}" class="text-decoration-none">
+            <div class="card">
+                <div class="card-body text-center">
+                    <img src="{{ asset('assets/img/kaiadmin/Drive.png') }}">
+                    <h5 class="card-title">Skripsi</h5>
+                    <p class="card-text">2020/2021</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<!-- resources/views/documents/laporanMagang.blade.php -->
+<form action="{{ route('documents.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <input type="hidden" name="fitur" value="dokumenAkademik"> <!-- Sesuaikan untuk fitur dokumenAkademik atau laporanMagang -->
+    <!-- Input lainnya seperti nama, tahun, dan file -->
+    <button type="submit">Upload</button>
+</form>
 
-    <!-- Core JS Files -->
-    <script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
-    <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/script.js') }}"></script> <!-- Custom JS -->
+<div class="form-group">
+    <label for="tahun">Tahun:</label>
+    <input type="number" name="tahun" id="tahun" class="form-control" required>
+</div>
+<div class="form-group">
+    <label for="file">File:</label>
+    <input type="file" name="file" id="file" class="form-control" required>
+</div>
+<button type="submit" class="btn btn-success">Simpan</button>
+</form>
+</div>
+<!-- Core JS Files -->
+<script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
+<script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/script.js') }}"></script> <!-- Custom JS -->
 
 </div>
-
 @endsection

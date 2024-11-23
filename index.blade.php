@@ -102,16 +102,18 @@
                         @endif
                     </td>
                     <td>
+                        <!-- Tombol Edit -->
                         <a href="{{ route('documents.edit', $document->id) }}" class="btn btn-warning">Edit</a>
+
+                        <!-- Tombol Delete -->
+                        <form action="{{ route('documents.destroy', $document->id) }}" method="POST" style="display: inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus dokumen ini?')">Hapus</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-
-
-
-    </table>
-</div>
-@endsection

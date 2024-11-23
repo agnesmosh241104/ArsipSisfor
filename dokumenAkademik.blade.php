@@ -37,8 +37,9 @@
                 <input class="form-control" type="search" placeholder="Search" name="query" aria-label="Search" value="{{ old('query') }}">
                 <button class="btn btn-outline-secondary" type="submit">
                     <i class="fa fa-search"></i>
-                </button> 
+                </button>
             </form>
+
 
             <div class="user-info">
                 <img src="{{ asset('assets/img/kaiadmin/setting.png') }}" alt="" height="50">
