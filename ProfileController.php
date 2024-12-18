@@ -1,84 +1,58 @@
 <?php
 
+// app/Http/Controllers/ProfileController.php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    public function editProfile()
+    public function edit()
     {
+        // Mendapatkan data pengguna yang sedang login
         $user = Auth::user();
+
+        // Menampilkan halaman edit profil dengan data pengguna
         return view('profile', compact('user'));
     }
 
-    public function updateProfile(Request $request) 
-    { 
-        // Ambil user yang sedang login
+    public function update(Request $request)
+    {
+        // Mendapatkan data pengguna yang sedang login
         $user = Auth::user();
 
-        // Validasi inputan, jika diperlukan
+        // Validasi input dari form
         $request->validate([
-            'name' => 'required|string|max:255', // Validasi nama
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id, // Validasi email
-            'password' => 'nullable|string|min:6|confirmed', // Validasi password jika diisi
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'status' => 'nullable|string|max:255',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // Update informasi user
+        // Update data pengguna
         $user->name = $request->input('name');
-        $user->email = $request->input('email'); 
-        
-        // Jika password diinputkan, update password
-        if ($request->filled('password')) {
-            $user->password = bcrypt($request->input('password'));
-        }
+        $user->email = $request->input('email');
+        $user->status = $request->input('status');
 
-        // Simpan perubahan
-        // $user->save();
-
-        return redirect()->route('profile.edit')->with('success', 'Profile updated successfully');
-    }
-
-    public function show() 
-    { 
-        $user = Auth::user();
-        return view('profile', compact('user'));
-    }
-
-    public function updateContact(Request $request)
-    {
-        // Validasi data masukan
-        $validatedData = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users,username,' . auth()->id(),
-            'city' => 'required|string|max:255',
-            'dob' => 'required|date',
-            'gender' => 'required|string',
-            'address' => 'required|string',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Sesuaikan ukuran maksimal sesuai kebutuhan
-        ]);
-
-        $user = auth()->user();
-        
-        // Update informasi kontak pengguna
-        $user->first_name = $validatedData['first_name'];
-        $user->last_name = $validatedData['last_name'];
-        $user->username = $validatedData['username'];
-        $user->city = $validatedData['city'];
-        $user->dob = $validatedData['dob']; 
-        $user->gender = $validatedData['gender'];
-        $user->address = $validatedData['address'];
-
-        // Proses upload foto jika ada
+        // Jika ada foto profil baru, upload dan simpan
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('photos', 'public'); // Simpan di direktori public/photos
-            $user->photo = $photoPath; // Simpan path foto dalam profil pengguna
+            // Hapus foto lama jika ada
+            if ($user->photo && Storage::exists('public/' . $user->photo)) {
+                Storage::delete('public/' . $user->photo);
+            }
+
+            // Simpan foto baru
+            $path = $request->file('photo')->store('profile_photos', 'public');
+            $user->photo = $path;
         }
 
+        // Simpan perubahan data pengguna
         $user->save();
 
-        return redirect()->back()->with('success', 'Personal information updated successfully.');
+        // Redirect ke halaman profil setelah update
+        return redirect()->route('profile')->with('success', 'Profile updated successfully');
     }
 }
