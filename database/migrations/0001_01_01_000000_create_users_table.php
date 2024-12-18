@@ -12,14 +12,30 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
+//             $table->id();
+// $table->string('google_id');
+// $table->string('google_token');
+// $table->string('google_refresh_token')->nullable();
+// $table->string('name');
+// $table->string('email')->unique();
+// $table->timestamp('email_verified_at')->nullable();
+// $table->string('password');
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['mahasiswa'], ['dosen'], ['staff'])->default('mahasiswa');
+            $table->string('photo')->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->rememberToken();
             $table->timestamps();
         });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('github_token')->nullable();
+            $table->string('github_refresh_token')->nullable();
+});
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
@@ -47,3 +63,5 @@ return new class extends Migration
         Schema::dropIfExists('sessions');
     }
 };
+
+
