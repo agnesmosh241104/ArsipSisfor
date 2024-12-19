@@ -1,30 +1,43 @@
 <?php
 
-// app/Http/Controllers/ProfileController.php
+namespace App\Http\Controllers\Api;
 
-namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    public function edit()
+    // Menampilkan profil pengguna yang sedang login
+    public function show(Request $request)
     {
-        // Mendapatkan data pengguna yang sedang login
-        $user = Auth::user();
+        $user = $request->user();
 
-        // Menampilkan halaman edit profil dengan data pengguna
-        return view('profile', compact('user'));
+        return response()->json([
+            'status' => 'success',
+            'data' => [
+                'name' => $user->name,
+                'email' => $user->email,
+                'status' => $user->status,
+                'photo_url' => $user->photo ? asset('storage/' . $user->photo) : asset('assets/images/default-profile.jpg'),
+            ],
+            'links' => [
+                'self' => route('profile.show'), // Link ke resource saat ini
+                'update_profile' => route('profile.update'), // Link untuk update profil
+                'delete_photo' => route('profile.deletePhoto'), // Link untuk menghapus foto profil
+                'logout' => route('logout'), // Link untuk logout
+            ]
+        ]);
     }
 
+    // Memperbarui profil pengguna
     public function update(Request $request)
     {
-        // Mendapatkan data pengguna yang sedang login
         $user = Auth::user();
 
-        // Validasi input dari form
+        // Validasi input
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
@@ -37,22 +50,33 @@ class ProfileController extends Controller
         $user->email = $request->input('email');
         $user->status = $request->input('status');
 
-        // Jika ada foto profil baru, upload dan simpan
+        // Jika ada foto baru, hapus foto lama dan simpan foto baru
         if ($request->hasFile('photo')) {
-            // Hapus foto lama jika ada
             if ($user->photo && Storage::exists('public/' . $user->photo)) {
                 Storage::delete('public/' . $user->photo);
             }
 
-            // Simpan foto baru
             $path = $request->file('photo')->store('profile_photos', 'public');
             $user->photo = $path;
         }
 
-        // Simpan perubahan data pengguna
         $user->save();
 
-        // Redirect ke halaman profil setelah update
-        return redirect()->route('profile')->with('success', 'Profile updated successfully');
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Profile updated successfully',
+            'data' => [
+                'name' => $user->name,
+                'email' => $user->email,
+                'status' => $user->status,
+                'photo_url' => $user->photo ? asset('storage/' . $user->photo) : asset('assets/images/default-profile.jpg'),
+            ],
+            'links' => [
+                'self' => route('profile.show'), // Link ke resource saat ini
+                'update_profile' => route('profile.update'), // Link untuk memperbarui profil
+                'delete_photo' => route('profile.deletePhoto'), // Link untuk menghapus foto profil
+                'logout' => route('logout'), // Link untuk logout
+            ]
+        ]);
     }
 }

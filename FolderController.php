@@ -1,126 +1,152 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 use App\Models\Folder;
-use App\Models\File;
-use App\Models\Activity;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class FolderController extends Controller
 {
-    public function store(Request $request)
+    // Menampilkan Semua Folder (GET)
+    public function index(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'category' => 'required|string',
-        ]);
-    
-        Folder::create([
-            'name' => $request->name,
-            'category' => $request->category,
-            'user_id' => Auth::id(),
-        ]);
-    
-        return redirect()->route('folders.index', $request->category)
-            ->with('success', "Folder '{$request->name}' berhasil ditambahkan ke kategori {$request->category}.");
-    }
-    
-    public function show($category, $folderId)
-    {
-        $folderData = Folder::find($folderId);
-        $files = File::where('folder_id', $folderId)->get();
-    
-        return view('folders.show', [
-            'folderData' => $folderData,
-            'category' => $category,
-            'files' => $files
+        // Ambil kategori folder jika ada
+        $category = $request->query('category');
+
+        $folders = Folder::when($category, function ($query, $category) {
+            return $query->where('category', $category);
+        })->get();
+
+        // Tambahkan HATEOAS links untuk setiap folder
+        $folders = $folders->map(function ($folder) {
+            return [
+                'id' => $folder->id,
+                'name' => $folder->name,
+                'category' => $folder->category,
+                'description' => $folder->description,
+                'created_at' => $folder->created_at,
+                'updated_at' => $folder->updated_at,
+                'links' => [
+                    'self' => url("/api/folders/{$folder->id}"),
+                    'update' => url("/api/folders/{$folder->id}"),
+                    'delete' => url("/api/folders/{$folder->id}"),
+                ],
+            ];
+        });
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $folders,
         ]);
     }
 
-    public function destroy(Folder $folder)
+    // Menampilkan Folder Berdasarkan ID (GET)
+    public function show($id)
     {
-        // Hapus semua file dalam folder terlebih dahulu
-        if ($folder->files) {
-            foreach ($folder->files as $file) {
-                $file->delete();
-            }
+        $folder = Folder::find($id);
+
+        // Jika folder tidak ditemukan
+        if (!$folder) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Folder not found.',
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data' => [
+                'id' => $folder->id,
+                'name' => $folder->name,
+                'category' => $folder->category,
+                'description' => $folder->description,
+                'created_at' => $folder->created_at,
+                'updated_at' => $folder->updated_at,
+                'links' => [
+                    'self' => url("/api/folders/{$folder->id}"),
+                    'update' => url("/api/folders/{$folder->id}"),
+                    'delete' => url("/api/folders/{$folder->id}"),
+                ],
+            ],
+        ]);
+    }
+
+    // Mengupdate Folder (PUT)
+    public function update(Request $request, $id)
+    {
+        $folder = Folder::find($id);
+
+        // Jika folder tidak ditemukan
+        if (!$folder) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Folder not found.',
+            ], 404);
+        }
+
+        // Validasi data yang dikirimkan
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $validator->errors(),
+            ], 400);
+        }
+
+        // Update data folder
+        $folder->name = $request->input('name');
+        $folder->category = $request->input('category');
+        $folder->description = $request->input('description', $folder->description);
+        $folder->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Folder updated successfully.',
+            'data' => [
+                'id' => $folder->id,
+                'name' => $folder->name,
+                'category' => $folder->category,
+                'description' => $folder->description,
+                'created_at' => $folder->created_at,
+                'updated_at' => $folder->updated_at,
+                'links' => [
+                    'self' => url("/api/folders/{$folder->id}"),
+                    'delete' => url("/api/folders/{$folder->id}"),
+                ],
+            ],
+        ]);
+    }
+
+    // Menghapus Folder (DELETE)
+    public function destroy($id)
+    {
+        $folder = Folder::find($id);
+
+        // Jika folder tidak ditemukan
+        if (!$folder) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Folder not found.',
+            ], 404);
         }
 
         // Hapus folder
         $folder->delete();
 
-        return redirect()->route('folders.index', ['category' => $folder->category])
-            ->with('success', 'Folder berhasil dihapus.');
-    }
-
-    public function viewFile($fileId)
-    {
-        $file = File::find($fileId);
-    
-        if (!$file) {
-            return redirect()->back()->with('error', 'File not found.');
-        }
-    
-        // Log the view activity
-        Activity::create([
-            'user_id' => Auth::id(),
-            'action' => 'viewed',
-            'file_id' => $file->id,
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Folder deleted successfully.',
+            'links' => [
+                'list_folders' => url("/api/folders"),
+                'create_folder' => url("/api/folders"),
+            ],
         ]);
-    
-        return response()->file(storage_path('app/public/' . $file->path));
     }
-
-public function uploadFile(Request $request, $category, $folderId)
-{
-    $request->validate([
-        'file' => 'required|file|mimes:jpg,jpeg,png,pdf,doc,docx|max:2048',
-        'description' => 'required|string|max:255',
-    ]);
-
-    $folderData = Folder::find($folderId);
-
-    if (!$folderData) {
-        return redirect()->route('folders.index', $category)->with('error', 'Folder not found.');
-    }
-
-    $file = $request->file('file');
-    $fileName = time() . '_' . $file->getClientOriginalName();
-    $filePath = $file->storeAs('uploads', $fileName, 'public');
-    $fileSize = $file->getSize();
-
-    $uploadedFile = File::create([
-        'name' => $fileName,
-        'path' => $filePath,
-        'folder_id' => $folderId,
-        'description' => $request->description,
-        'user_id' => Auth::id(),
-        'size' => $fileSize,
-        'category' => $request->category, // Simpan kategori file
-    ]);
-
-    // Log the upload activity
-    Activity::create([
-        'user_id' => Auth::id(),
-        'action' => 'uploaded',
-        'file_id' => $uploadedFile->id,
-    ]);
-
-    return redirect()->route('folders.show', ['category' => $category, 'folder' => $folderId])
-        ->with('success', 'File uploaded successfully.');
-}
-
-public function index($category)
-{
-    // Ambil semua folder berdasarkan kategori
-    $folders = Folder::where('category', $category)->get();
-
-    return view('folders.index', compact('folders', 'category'));
-}
-
-
 }

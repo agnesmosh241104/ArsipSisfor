@@ -1,8 +1,9 @@
 <?php
-// app/Http/Controllers/SearchController.php
-namespace App\Http\Controllers;
 
-use App\Models\Document;
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Models\File;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -11,11 +12,9 @@ class SearchController extends Controller
     {
         $query = $request->input('query');
 
-        // Melakukan pencarian pada model Document
-        $documents = Document::where('nama', 'LIKE', "%{$query}%")
-            ->orWhere('tahun', 'LIKE', "%{$query}%")
-            ->get();
+        // Melakukan pencarian pada model File berdasarkan nama
+        $results = File::where('name', 'LIKE', "%{$query}%")->get();
 
-        return view('documents.index', compact('documents', 'query'));
+        return response()->json($results);
     }
 }
