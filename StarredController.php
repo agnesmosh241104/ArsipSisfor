@@ -110,3 +110,4 @@ class StarredController extends Controller
         ]);
     }
 }
+  
