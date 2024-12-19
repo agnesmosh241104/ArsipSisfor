@@ -123,6 +123,3 @@ Route::post('folders/{category}/{folder}/files', [FileController::class, 'store'
 // Route::delete('/trash/delete/{id}', [FileController::class, 'deletePermanently'])->name('delete-file');
 
 Route::post('/files/{file}/toggle-star', [FileController::class, 'toggleStar'])->name('files.toggle-star');
-
-// Route::get('/auth/redirect', [SocialiteController::class, 'redirect']);
-// Route::get('/auth/google/callback', [SocialiteController::class, 'callback']);
