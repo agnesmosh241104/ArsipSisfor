@@ -2,22 +2,37 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Seeder;
+use App\Models\User;
 
-class DatabaseSeeder extends Seeder
+class DatabaseSeeder extends Seeder 
 {
     /**
-     * Seed the application's database.
+     * Run the migrations.
      */
+    public function up(): void
+    {
+        
+        Schema::create('admins', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->timestamps();
+        });
+    }
+
     public function run(): void
     {
-        // User::factory(10)->create();
-
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admin',
+            'email' => 'admin@ppw.si',
+            'role' => 'admin',
+            'password' => Hash::make("admin")
         ]);
     }
-}
+
+};

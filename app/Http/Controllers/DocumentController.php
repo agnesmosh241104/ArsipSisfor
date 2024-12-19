@@ -3,50 +3,61 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\File;
+use App\Models\Folder;
+
 
 class DocumentController extends Controller
 {
-    public function dokumenAkademik()
-    {
-        return view('dokumenAkademik');
-    }
 
-    public function laporanMagang()
-    {
-        return view('laporanMagang');
-    }
+  // public function index()
+  // {
+  //     $files = File::all();
+  //     $folders = Folder::all();
 
-    public function dokKompetisi()
-    {
-        return view('dokKompetisi');
-    }
+  //     return view('documents', compact('files', 'folders'));
 
-    public function dokKepanitiaan()
-    {
-        return view('dokKepanitiaan');
-    }
+  // }
 
-    public function index()
-    {
-        return view('dokumenAkademik'); // Ganti dengan nama view yang sesuai
-    }
+  public function index(Request $request)
+{
+    // Kategori dokumen
+    $categories = [
+        'dokumenAkademik' => 'Dokumen Akademik',
+        'dokumenKompetisi' => 'Dokumen Kompetisi',
+        'laporanMagang' => 'Dokumen Magang',
+        'dokumenKepanitiaan' => 'Dokumen Kepanitiaan',
+    ];
 
-    public function createNewFolder()
-    {
-        // Logic untuk membuat folder baru
-        return view('createNewFolder'); // Ganti dengan view untuk membuat folder baru
-    }
+    // Tangkap kategori yang dipilih dari request
+    $currentCategory = $request->input('category', 'dokumenAkademik');
+    // Filter folder dan file berdasarkan kategori
+    $folders = Folder::where('category', $currentCategory)->get();
+    $files = File::where('category', $currentCategory)->paginate(9);
 
-    public function uploadFolder()
-    {
-        // Logic untuk mengupload folder
-        return view('uploadFolder'); // Ganti dengan view untuk mengupload folder
-    }
-
-    public function uploadFile()
-    {
-        // Logic untuk mengupload file
-        return view('uploadFile'); // Ganti dengan view untuk mengupload file
-    }
+    // Kirim data ke view
+    return view('documents', compact('categories', 'currentCategory', 'folders', 'files'));
 }
 
+//hapus folder dan file
+
+
+public function destroy(Folder $folder)
+{
+    // Hapus semua file dalam folder terlebih dahulu
+    if ($folder->files) {
+        foreach ($folder->files as $file) {
+            $file->delete();
+        }
+    }
+
+    // Hapus folder
+    $folder->delete();
+
+    return redirect()->route('documents.index', ['category' => $folder->category])
+        ->with('success', 'Folder berhasil dihapus.');
+  }
+  
+
+
+}

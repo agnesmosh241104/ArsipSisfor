@@ -13,8 +13,7 @@
     <div class="wrapper">
         <!-- Include Sidebar -->
         @include('partials.sidebar')
-
-       
+        @include('partials.topbar')
 
             <!-- Main Content -->
             <div class="main-content">
@@ -27,3 +26,10 @@
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>
+
+
+{{-- <ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('profile.edit') }}">Profile</a>
+    </li>
+</ul> --}}

@@ -8,9 +8,31 @@ body {
     padding: 1rem;
 }
 
-.avatar-img {
-    border-radius: 10%;
-    object-fit: cover;
+/* Navbar Kustom */
+.custom-navbar {
+    width: 100%;                   /* Membuat navbar selebar mungkin */
+    max-width: 2000px;             /* Menentukan lebar maksimum */
+    margin-left: -10px;             /* Menyelaraskan ke tengah */        
+    padding: 0 10px;               /*Menambahkan padding horizontal*/
+}
+
+.dropdown-item {
+    padding: 10px 15px; /* Padding untuk item */
+    color: #333; /* Warna teks */
+    text-decoration: none; /* Menghilangkan garis bawah */
+    display: block; /* Membuat item seluas dropdown */
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1; /* Warna latar belakang saat hover */
+}
+
+.user-info { 
+    display: flex;                  /* Menggunakan Flexbox untuk penataan */
+    align-items: center;           /* Menyelaraskan item secara vertikal di tengah */
+    justify-content: flex-end;     /* Menyelaraskan item ke kanan */
+    margin-left: auto;             /* Menggunakan margin otomatis untuk mendorong elemen ini ke kanan */
+    padding: 10px;                 /* Padding untuk memberikan ruang di dalam elemen */
 }
 
 .sidebar {
@@ -64,7 +86,7 @@ p {
 
 .icon-container {
     font-size: 50px;
-    color: darkcyan;
+    color: darkblue;
     margin-bottom: 15px;
 }
 /* 
@@ -129,7 +151,8 @@ form.d-flex .btn:hover {
 }
 
 form.d-flex .btn .fa-search {
-    font-size: 16px; /* Ukuran ikon pencarian */
+    font-size: 18px; /* Ukuran ikon pencarian */
+    
 }
 
 /* Responsive styling */
@@ -142,5 +165,58 @@ form.d-flex .btn .fa-search {
     form.d-flex .btn {
         border-radius: 25px; /* Melengkung penuh di perangkat kecil */
         margin-bottom: 10px; /* Jarak antar elemen form */
+    }
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%; /* Jika perlu posisi di tengah secara vertikal */
+    margin-top: 20px; /* Tambahkan margin jika perlu */
+}
+
+form {
+    display: flex;
+    width: 100%;
+    max-width: 600px; /* Sesuaikan lebar maksimal form */
+}
+
+/* CSS untuk mengatur avatar gambar profil */
+.avatar-img {
+    width: 40px; /* Menentukan lebar gambar */
+    height: 40px; /* Menentukan tinggi gambar */
+    object-fit: cover; /* Menyesuaikan gambar agar tidak terdistorsi */
+    border-radius: 50%; /* Membuat gambar menjadi bulat */
+    overflow: hidden; /* Menghindari gambar keluar dari batas */
+}
+
+/* Menyesuaikan posisi dropdown di sebelah kanan */
+.dropdown-menu-end {
+    right: 0; /* Menempatkan dropdown di sebelah kanan */
+    left: auto; /* Menghindari tumpang tindih dengan posisi lainnya */
+}
+
+/* Menempatkan avatar di posisi kanan atas */
+.nav-link {
+    position: relative;
+    top: 10px; /* Mengatur posisi gambar sedikit ke atas */
+    right: 10px; /* Mengatur posisi gambar sedikit ke kanan */
+}
+
+/* Responsif untuk perangkat mobile */
+@media (max-width: 768px) {
+    .avatar-img {
+        width: 30px; /* Menyesuaikan ukuran gambar di perangkat kecil */
+        height: 30px;
+    }
+}
+
+/* Responsif untuk perangkat tablet atau lebih besar */
+@media (min-width: 768px) {
+    .avatar-img {
+        width: 40px; /* Menyesuaikan ukuran gambar di perangkat besar */
+        height: 40px;
     }
 }
